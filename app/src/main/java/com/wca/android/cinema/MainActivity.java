@@ -3,8 +3,8 @@ package com.wca.android.cinema;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import java.io.IOException;
@@ -16,8 +16,9 @@ import utilities.NetworkUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = NetworkUtils.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
+    @BindView(R.id.movies_grid) GridView mGridView;
     @BindView(R.id.indeterminateBar)
     ProgressBar mProgressBar;
 
@@ -37,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mProgressBar.setVisibility(View.INVISIBLE); //Hide Progressbar by Default
 
-       //if(shouldCall) { // I know if the method has been called before
-        // new FetchMovies().execute();
-         // shouldCall = false;
-       //}
+       if(shouldCall) { // I know if the method has been called before
+         new FetchMovies().execute();
+          shouldCall = false;
+       }
 
     }
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
+            mPopularList.toString();
             return null;
         }
 
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void  s) {
             super.onPostExecute(s);
             mProgressBar.setVisibility(View.INVISIBLE);
+
+            MovieAdapter adapter = new MovieAdapter(MainActivity.this,
+                    mPopularList);
+
+            mGridView.setAdapter(adapter);
 
         }
     }
