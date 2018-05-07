@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cinema</string>
+    <string name="pop_mov">show popular movies</string>
+    <string name="top_mov">show top rated movies</string>
 </resources>

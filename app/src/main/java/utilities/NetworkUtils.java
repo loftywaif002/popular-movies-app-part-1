@@ -1,6 +1,9 @@
 package utilities;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.wca.android.cinema.Movie;
@@ -20,7 +23,6 @@ public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    protected static ArrayList<Movie> movies = new ArrayList<Movie>();
 
     /**
      * This method returns the entire result from the HTTP response.
@@ -30,7 +32,7 @@ public class NetworkUtils {
      * @throws IOException Related to network and stream reading
      */
     public static ArrayList<Movie> fetchData(String url) throws IOException {
-
+        ArrayList<Movie> movies = new ArrayList<Movie>();
         try {
 
             URL new_url = new URL(url); //create a url from a String
@@ -39,7 +41,7 @@ public class NetworkUtils {
 
             InputStream inputStream = connection.getInputStream(); //reading from the object
             String results = IOUtils.toString(inputStream);  //IOUtils to convert inputstream objects into Strings type
-            parseJson(results);
+            parseJson(results,movies);
             inputStream.close();
 
         } catch (IOException e) {
@@ -49,12 +51,12 @@ public class NetworkUtils {
         return movies;
     }
 
-    public static void parseJson(String data){
+    public static void parseJson(String data, ArrayList<Movie> list){
 
 
         try {
             JSONObject mainObject = new JSONObject(data);
-
+            Log.v(TAG,mainObject.toString());
             JSONArray resArray = mainObject.getJSONArray("results"); //Getting the results object
             for (int i = 0; i < resArray.length(); i++) {
                 JSONObject jsonObject = resArray.getJSONObject(i);
@@ -70,7 +72,7 @@ public class NetworkUtils {
                 movie.setReleaseDate(jsonObject.getString("release_date"));
                 movie.setPosterPath(jsonObject.getString("poster_path"));
                 //Adding a new movie object into ArrayList
-                movies.add(movie);
+                list.add(movie);
 
             }
         } catch (JSONException e) {
@@ -78,6 +80,16 @@ public class NetworkUtils {
             Log.e(TAG, "Erro occurred during JSON Parsing");
         }
 
+    }
+
+    public static Boolean networkStatus(Context context){
+        ConnectivityManager manager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
+            return true;
+        }
+        return false;
     }
 
 }
