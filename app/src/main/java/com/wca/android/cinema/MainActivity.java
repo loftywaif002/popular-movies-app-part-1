@@ -1,11 +1,13 @@
 package com.wca.android.cinema;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -42,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mProgressBar.setVisibility(View.INVISIBLE); //Hide Progressbar by Default
         new FetchMovies().execute();
+
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> view, View view1, int position, long l) {
+                Movie movie = (Movie) view.getAdapter().getItem(position);
+                Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
+                intent.putExtra("detail", movie);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -75,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mGridView.invalidateViews();
         mGridView.setAdapter(adapter);
     }
+
 
     //AsyncTask
     public class FetchMovies extends AsyncTask<Void,Void,Void>{
