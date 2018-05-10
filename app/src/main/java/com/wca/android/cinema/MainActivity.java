@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.INVISIBLE); //Hide Progressbar by Default
         new FetchMovies().execute();
 
+
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -66,19 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
         if (id == R.id.pop_movies) {
-
             refreshList(mPopularList);
         }
-
         if (id == R.id.top_movies) {
-
             refreshList(mTopTopRatedList);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
