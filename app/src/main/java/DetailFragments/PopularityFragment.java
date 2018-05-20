@@ -19,12 +19,16 @@ public class PopularityFragment extends Fragment {
         return view;
     }
 
-    public void set_title_rating(String title, Float rating, String vote_avg_text) {
+    public void set_title_rating(String title, Float rating, String vote_avg_text, String rel_dt){
+
         TextView text_view = (TextView) getView().findViewById(R.id.movie_title);
         RatingBar ratingBar = (RatingBar) getView().findViewById(R.id.movie_rating);
         TextView rating_textView = (TextView) getView().findViewById(R.id.tmdb_rating);
+        TextView rel_date = (TextView) getView().findViewById(R.id.release_date);
+
         ratingBar.setRating(rating);
         text_view.setText(title);
         rating_textView.setText(vote_avg_text);
+        rel_date.setText(rel_dt);
     }
 }
