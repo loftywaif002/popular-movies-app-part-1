@@ -7,21 +7,21 @@
     android:orientation="vertical">
 
 
-		<TextView
-			android:id="@+id/movie_title"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="15dp"
-			android:layout_marginTop="15dp"
-			android:textColor="#000000"
-			android:text="TEST"
-			android:textAppearance="?android:attr/textAppearanceLarge"
-		/>
+	<TextView
+		android:id="@+id/movie_title"
+		android:layout_width="wrap_content"
+		android:layout_height="41dp"
+		android:layout_marginLeft="17dp"
+		android:layout_marginTop="15dp"
+		android:text="TEST"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textColor="#000000"
+	/>
 
 	<RatingBar
 		android:id="@+id/movie_rating"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_height="45dp"
 		android:layout_marginLeft="15dp"
 		android:layout_marginTop="5dp"
 		android:scaleX="0.7"
@@ -31,6 +31,27 @@
 		tools:layout_editor_absoluteX="16dp"
 		tools:layout_editor_absoluteY="68dp"/>
 
+	<TextView
+		android:id="@+id/tmdb_rating"
+		android:layout_width="238dp"
+		android:layout_height="40dp"
+		android:layout_marginLeft="17dp"
+		android:layout_marginTop="5dp"
+
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textColor="#000000"
+	/>
+
+	<TextView
+		android:id="@+id/release_date"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:layout_marginLeft="17dp"
+		android:layout_marginTop="5dp"
+		android:text="Nov 5, 2014"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textColor="#000000"
+	/>
 
 </LinearLayout>
 

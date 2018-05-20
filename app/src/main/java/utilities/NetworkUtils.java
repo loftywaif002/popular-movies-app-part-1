@@ -62,7 +62,7 @@ public class NetworkUtils {
                 JSONObject jsonObject = resArray.getJSONObject(i);
                 Movie movie = new Movie(); //New Movie object
                 movie.setId(jsonObject.getInt("id"));
-                movie.setVoteAverage(jsonObject.getInt("vote_average"));
+                movie.setVoteAverage(jsonObject.getDouble("vote_average"));
                 movie.setVoteCount(jsonObject.getInt("vote_count"));
                 movie.setOriginalTitle(jsonObject.getString("original_title"));
                 movie.setTitle(jsonObject.getString("title"));
