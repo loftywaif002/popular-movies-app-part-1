@@ -37,7 +37,6 @@
 		android:layout_height="40dp"
 		android:layout_marginLeft="17dp"
 		android:layout_marginTop="5dp"
-
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:textColor="#000000"
 	/>
@@ -48,7 +47,6 @@
 		android:layout_height="40dp"
 		android:layout_marginLeft="17dp"
 		android:layout_marginTop="5dp"
-		android:text="Nov 5, 2014"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:textColor="#000000"
 	/>

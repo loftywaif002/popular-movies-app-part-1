@@ -4,5 +4,6 @@
     <dimen name="detail_poster_linear_width">150dp</dimen>
     <dimen name="detail_poster_linear_margin_top">10dp</dimen>
     <dimen name="detail_poster_linear_margin_left">10dp</dimen>
+    <dimen name="overview_fragment_margin_bottom">10dp</dimen>
     <dimen name="grid_margin_top">1dp</dimen>
 </resources>

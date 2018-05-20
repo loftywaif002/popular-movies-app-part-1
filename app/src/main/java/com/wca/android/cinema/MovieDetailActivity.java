@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import DetailFragments.BackdropFragment;
+import DetailFragments.OverviewFragment;
 import DetailFragments.PopularityFragment;
 import DetailFragments.PosterFragment;
 
@@ -53,15 +54,19 @@ public class MovieDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        String overview_text = mov_intent.getOverview();
 
         BackdropFragment backdropFragment = (BackdropFragment) getFragmentManager().findFragmentById(R.id.fragment_backdrop);
         PosterFragment posterFragment  = (PosterFragment) getFragmentManager().findFragmentById(R.id.fragment_poster);
         PopularityFragment popularityFragment = (PopularityFragment) getFragmentManager().findFragmentById(R.id.fragment_rating);
+        OverviewFragment overviewFragment = (OverviewFragment) getFragmentManager().findFragmentById(R.id.overview_fragment);
 
         backdropFragment.set_backdrop(full_backdrop_url);
         posterFragment.set_poster(full_poster_url);
 
         popularityFragment.set_title_rating(movie_title,mvote_avg,rating_text,formatter.format(date));
+
+        overviewFragment.set_overview(overview_text);
 
     }
 
