@@ -12,4 +12,4 @@ fetches movie information using themoviedb.org API.
 
 ### Getting Started
 
-App uses The Movie Database API. You have to enter your API key in order to run the app. To create Api key, signup here. https://www.themoviedb.org/account/signup?language=en-EN. Just set api key inside:  "local.properties" file.
+App uses The Movie Database API. You have to enter your API key in order to run the app. To create Api key, signup here. https://www.themoviedb.org/account/signup?language=en-EN. Just set api key inside:  "local.properties" apiKey=<YOUR_API_KEY>.

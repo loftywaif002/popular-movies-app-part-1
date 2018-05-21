@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Movie> mPopularList;
     ArrayList<Movie> mTopTopRatedList;
 
+    final static String POPULAR_MOVIES = "pop_mov";
+    final static String TOP_RATED_MOVIES = "topratedlist";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mProgressBar.setVisibility(View.INVISIBLE); //Hide Progressbar by Default
         new FetchMovies().execute();
-
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -56,6 +58,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //Save date before app is closed
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(POPULAR_MOVIES, mPopularList);
+        outState.putSerializable(TOP_RATED_MOVIES, mTopTopRatedList);
+        super.onSaveInstanceState(outState);
+    }
+
+    //Loading SavedInstance
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mPopularList = (ArrayList<Movie>) savedInstanceState.getSerializable(POPULAR_MOVIES);
+        mTopTopRatedList = (ArrayList<Movie>) savedInstanceState.getSerializable(TOP_RATED_MOVIES);
     }
 
     @Override

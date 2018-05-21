@@ -55,7 +55,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
 
         String overview_text = mov_intent.getOverview();
-
         BackdropFragment backdropFragment = (BackdropFragment) getFragmentManager().findFragmentById(R.id.fragment_backdrop);
         PosterFragment posterFragment  = (PosterFragment) getFragmentManager().findFragmentById(R.id.fragment_poster);
         PopularityFragment popularityFragment = (PopularityFragment) getFragmentManager().findFragmentById(R.id.fragment_rating);
@@ -63,11 +62,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         backdropFragment.set_backdrop(full_backdrop_url);
         posterFragment.set_poster(full_poster_url);
-
         popularityFragment.set_title_rating(movie_title,mvote_avg,rating_text,formatter.format(date));
-
         overviewFragment.set_overview(overview_text);
-
     }
 
 }
