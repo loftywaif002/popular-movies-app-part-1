@@ -1,5 +1,6 @@
 package com.wca.android.cinema;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,8 +46,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mProgressBar.setVisibility(View.INVISIBLE); //Hide Progressbar by Default
-        new FetchMovies().execute();
-
+        if(NetworkUtils.networkStatus(MainActivity.this)){
+            new FetchMovies().execute();
+        }else{
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            dialog.setTitle(getString(R.string.title_network_alert));
+            dialog.setMessage(getString(R.string.message_network_alert));
+            dialog.setCancelable(false);
+            dialog.show();
+        }
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -58,6 +65,41 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(NetworkUtils.networkStatus(MainActivity.this)){
+            new FetchMovies().execute();
+        }else{
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            dialog.setTitle(getString(R.string.title_network_alert));
+            dialog.setMessage(getString(R.string.message_network_alert));
+            dialog.setCancelable(false);
+            dialog.show();
+        }
+
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        finish();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        finish();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        finish();
     }
 
     //Save date before app is closed
@@ -75,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         mPopularList = (ArrayList<Movie>) savedInstanceState.getSerializable(POPULAR_MOVIES);
         mTopTopRatedList = (ArrayList<Movie>) savedInstanceState.getSerializable(TOP_RATED_MOVIES);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,8 +160,8 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
 
-            popularMoviesURL = "http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="+myApiKey;
-            topRatedMoviesURL = "http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key="+myApiKey;
+            popularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key="+myApiKey+"&language=en-US";
+            topRatedMoviesURL = "https://api.themoviedb.org/3/movie/top_rated?api_key="+myApiKey+"&language=en-US";
 
             mPopularList = new ArrayList<>();
             mTopTopRatedList = new ArrayList<>();
@@ -127,7 +171,11 @@ public class MainActivity extends AppCompatActivity {
                     mPopularList = NetworkUtils.fetchData(popularMoviesURL); //Get popular movies
                     mTopTopRatedList = NetworkUtils.fetchData(topRatedMoviesURL); //Get top rated movies
                 }else{
-                    Toast.makeText(MainActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                    dialog.setTitle(getString(R.string.title_network_alert));
+                    dialog.setMessage(getString(R.string.message_network_alert));
+                    dialog.setCancelable(false);
+                    dialog.show();
                 }
             } catch (IOException e){
                 e.printStackTrace();
