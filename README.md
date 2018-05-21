@@ -8,7 +8,7 @@ when a  particular movie is selected, it launches a details screen with title, r
 allows users to save favorites, play trailers, and read user reviews. This app utilizes core Android user interface components and 
 fetches movie information using themoviedb.org API.
 
-![](https://www.dropbox.com/s/z0t2q9a5nop558x/menu-working.gif?dl=1)
+![](https://www.dropbox.com/s/z0t2q9a5nop558x/menu-working.gif?dl=0)
 
 ### Getting Started
 
